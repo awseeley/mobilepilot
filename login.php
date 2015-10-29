@@ -1,3 +1,46 @@
+<!-- FROM Role-Based Access Control Group -->
+<?php
+//require_once("./config.php");
+require_once("./common_db.php");
+require_once("./session.php");
+require_once("./login.php");
+
+// Where to go next
+if (isset($_GET['continue'])) {
+    $continue = $_GET['continue'];
+}
+else {
+    if (isset($_POST['continue'])) {
+        $continue = $_POST['continue'];
+    }
+    else {
+        $continue = "DisplayCategory.php";
+    }
+}
+
+if(isset($_POST['stage']) && ($_POST['stage'] == 'process')) {
+    process_form();
+} else {
+    print_form($continue, "Please enter your account details:");
+}
+
+function process_form() {
+    global $continue;
+    if(login($_POST['username'], $_POST['password'])) {
+        header("Location: $continue");
+    }
+    else {
+        print_form($continue, "Invalid credentials");
+    }
+}
+
+function print_form($continue, $error) {
+    global $store_name, $slogan;
+    $title = $store_name . " - " . "Shopper Login";
+    ?>
+<!--***************************************-->
+
+
 <html>
 <head>
 
@@ -26,7 +69,7 @@
 
       
 <div class="panel element centered" >
-<form class="form-horizontal" METHOD="post" ACTION="loginredirect.php" role="form" onsubmit="true">
+<form class="form-horizontal" METHOD="post" ACTION="loginredirect.php" role="form" onsubmit="return validateFormOnSubmit(this)">
 
     <!-- User Details -->
     <div class="input-group">

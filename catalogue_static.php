@@ -64,70 +64,60 @@
 					<div class="catitems">
 						<div class="row">
 
-							<!-- Show catalogue items -->
-							<?php
-
-							require_once "common_db.php";
-							# Get a PDO database connection - see http://www.php.net/manual/en/book.pdo.php
-							$dbo = db_connect();
-
-							// Get prices information
-							$query = "SELECT p.prod_name, p.prod_desc, p.prod_img_url pp.PrPr_Price FROM Product AS p 
-							INNER JOIN ProdPrices AS pp
-							ON p.prod_id = pp.PrPr_id"
-
-							try {
-								$statement = $dbo->query($query);
-							}
-							// Provide the exception handler - in this case, just print an error message and die,
-							catch (PDOException $ex) {
-								echo $ex->getMessage();
-								die ("Invalid query");
-							}
-
-							// Print out the cataloge items to paege, loop over all items
-							while($row = $statement->fetch()) { 
-													// Store catalog items in varibles to make it easier to read 
-								$name = $row[0];
-								$description = $row[1];
-								$img = $row[2];
-								$price = $row[3];
-
-								?> <!-- see http://www.php.net/manual/en/pdostatement.fetch.php -->
-								<a href="AddToCart.php">
-									<div class="col-sm-6">
-										<?php echo("<img src=\"img/$img\" alt=\"$name\" style=\"width:250px;height:200px;\">"); ?>
-										<?php echo("<p> <b>$name</b> </p>"); ?>
-										<?php echo("<p> <b>$description</b> </p>"); ?>
-										<?php echo("<p> <b>$price</b> </p>"); ?>
-
-										<TD><?php echo $row[$j]?></TD>
-
-										<?php	} ?> <!-- END WHILE LOOP -->
-									</div>
-								</a>
-								<?php
-									# Drop the reference to the database
-								$dbo = null;
-
-								?>
-
+							<!-- Repeat this for each new item -->
+							<a href="AddToCart.php">
+							<div class="col-sm-6">
+								<img src="img/product.png" alt="product" style="width:250px;height:200px;">
+								<p> <b>Nike</b> </p>
+								<p> Air Jordans </p>
+								<p> <b>$139.95</b> </p>
 							</div>
-						</div>
+							</a>
+							<a href="AddToCart.php">
+							<div class="col-sm-6">
+								<img src="img/product.png" alt="product" style="width:250px;height:200px;">
+								<p> <b>Nike</b> </p>
+								<p> Air Jordans </p>
+								<p> <b>$139.95</b> </p>
+							</div>
+							</a>
+							<!-- -->
+							<!-- Repeat this for each new item -->
+							<a href="AddToCart.php">
+							<div class="col-sm-6">
+								<img src="img/product.png" alt="product" style="width:250px;height:200px;">
+								<p> <b>Nike</b> </p>
+								<p> Air Jordans </p>
+								<p> <b>$139.95</b> </p>
+							</div>
+							</a>
+							<a href="AddToCart.php">
+							<div class="col-sm-6">
+								<img src="img/product.png" alt="product" style="width:250px;height:200px;">
+								<p> <b>Nike</b> </p>
+								<p> Air Jordans </p>
+								<p> <b>$139.95</b> </p>
+							</div>
+							</a>
+							<!-- -->
 
-						<div class="pages">
-							<ul class="pagination">
-								<li class="active"><a href="#">1</a></li>
-								<li ><a href="#">2</a></li>
-								<li><a href="#">3</a></li>
-								<li><a href="#">4</a></li>
-								<li><a href="#">5</a></li>
-							</ul>
 						</div>
-
 					</div>
+
+					<div class="pages">
+					<ul class="pagination">
+						<li class="active"><a href="#">1</a></li>
+						<li ><a href="#">2</a></li>
+						<li><a href="#">3</a></li>
+						<li><a href="#">4</a></li>
+						<li><a href="#">5</a></li>
+					</ul>
+					</div>
+
+
 				</div>
 			</div>
+		</div>
 
 
-		</body>
+	</body>
